@@ -12,7 +12,5 @@ export default function verifyMessage(message: string): boolean {
     .update(message.replaceAll(/\s/g, ""))
     .digest("base64");
 
-  console.log(hash);
-
   return goodHashes.includes(hash);
 }
