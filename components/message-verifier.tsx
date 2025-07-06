@@ -9,24 +9,14 @@ import { BadgeCheckIcon, BadgeXIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 
 const EXAMPLE_MESSAGE: string = `
-# charlotte zhuang
+why chocolate chip cookies are the best
 
-this is an example message that you can verify that i wrote.
+1. chocolate is delicious
+2. cookies are the perfect size for a sweet treat
+3. it reminds me of childhood
 
-if you can trust this site, you can trust that i wrote this.
-
-## online presence
-
-- github: charlotte-zhuang
-- linkedin: charlotte-zhuang
-- instagram: charlottechipcookie
-
-## websites
-
-- charlottezhuang.org
-- charlottezhuang.com
-- charlottechip.org
-- charlottechip.com
+written by charlotte
+verify on charlottezhuang.org
 `.trim();
 
 export default function MessageVerifier() {
@@ -39,14 +29,18 @@ export default function MessageVerifier() {
 
   return (
     <div className="flex flex-col gap-2 items-start">
-      <h2 className="text-md font-bold">Message Verifier</h2>
-
-      <p>authenticate that i wrote something.</p>
+      <h2 className="text-md font-bold">verify on charlottezhuang.org</h2>
 
       <p>
-        this form checks the hash of the contents against a list of known
-        hashes.
+        sometimes i sign my writing with &quot;verify on
+        charlottezhuang.org&quot;. you check the authenticity of those messages
+        here.
       </p>
+
+      <i>
+        verification is done by hash and will fail if even a single character is
+        incorrect
+      </i>
 
       <Textarea
         value={message}
@@ -75,7 +69,7 @@ export default function MessageVerifier() {
             ) : (
               <>
                 <BadgeXIcon />
-                unverified
+                unknown
               </>
             )}
           </Badge>
