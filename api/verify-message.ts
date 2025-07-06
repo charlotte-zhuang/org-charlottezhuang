@@ -4,7 +4,7 @@ export default function verifyMessage(message: string): boolean {
   // TODO: move to database and implement logic in server
   // hashes should be secret and protected by rate limiting or false positives can be brute forced
   const goodHashes: readonly string[] = [
-    "pKOqOdhuqkGjGY7VnEa+Xbn8rX/luO68QceH/GhuLc0=",
+    "ggEARWfjq7aUiwW0G6TlkUbZNr943yYhegGQh0Ktnk8=",
   ];
 
   // remove all whitespace since we don't really care about them
