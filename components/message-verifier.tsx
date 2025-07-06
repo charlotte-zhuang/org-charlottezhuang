@@ -46,7 +46,7 @@ export default function MessageVerifier() {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="paste the entire message here"
-        className="h-[200px]"
+        className="h-[270px]"
       />
 
       <div className="flex w-full gap-2 justify-between items-center h-12">
