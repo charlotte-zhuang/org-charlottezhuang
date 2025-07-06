@@ -13,7 +13,7 @@ why chocolate chip cookies are the best
 
 1. chocolate is delicious
 2. cookies are the perfect size for a sweet treat
-3. it reminds me of childhood
+3. they remind me of childhood
 
 written by charlotte
 verify on charlottezhuang.org
