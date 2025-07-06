@@ -33,8 +33,8 @@ export default function MessageVerifier() {
 
       <p>
         sometimes i sign my writing with &quot;verify on
-        charlottezhuang.org&quot;. you check the authenticity of those messages
-        here.
+        charlottezhuang.org&quot;. you can check the authenticity of those
+        messages here.
       </p>
 
       <i>
