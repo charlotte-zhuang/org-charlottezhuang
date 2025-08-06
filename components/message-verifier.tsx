@@ -1,12 +1,11 @@
 "use client";
 
-import verifyMessage from "@/api/verify-message";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { BadgeCheckIcon, BadgeXIcon } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const EXAMPLE_MESSAGE: string = `
 why chocolate chip cookies are the best
@@ -19,9 +18,47 @@ written by charlotte
 verify on charlottezhuang.org
 `.trim();
 
+async function verifyMessage(message: string): Promise<boolean> {
+  if (!message.trim()) return false;
+  
+  try {
+    const response = await fetch("/api/verify-message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    });
+    
+    if (!response.ok) return false;
+    
+    const data = await response.json();
+    return data.isValid === true;
+  } catch (error) {
+    return false;
+  }
+}
+
 export default function MessageVerifier() {
   const [message, setMessage] = useState("");
-  const isValid = useMemo(() => verifyMessage(message), [message]);
+  const [isValid, setIsValid] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  useEffect(() => {
+    if (!message.trim()) {
+      setIsValid(false);
+      return;
+    }
+
+    const timeoutId = setTimeout(async () => {
+      setIsVerifying(true);
+      const result = await verifyMessage(message);
+      setIsValid(result);
+      setIsVerifying(false);
+    }, 300); // debounce for 300ms
+
+    return () => clearTimeout(timeoutId);
+  }, [message]);
 
   const handleLoadExample = (): void => {
     setMessage(EXAMPLE_MESSAGE);
@@ -58,7 +95,7 @@ export default function MessageVerifier() {
               isValid
                 ? "bg-blue-500 text-white dark:bg-blue-600"
                 : "bg-red-500 text-white dark:bg-red-600",
-              { hidden: message.length === 0 }
+              { hidden: message.length === 0 || isVerifying }
             )}
           >
             {isValid ? (
